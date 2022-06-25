@@ -171,6 +171,9 @@ footer {
     left: 2rem;
     font-size: 3rem;
     font-weight: bolder;
+    background-color: red;
+    max-height: 15%;
+
 }
 
 #featured-book-title{
@@ -178,6 +181,9 @@ footer {
     top: 7rem;
     left: 2.5rem;
     font-weight: normal;
+    background-color: red;
+    max-height: 10%;
+
 }
 
 #featured-book-description{
@@ -187,6 +193,9 @@ footer {
     width: 35%;
     font-style: italic;
     font-size: medium;
+    max-height: 20%;
+    overflow-y: hidden;
+    background-color: red;
 }
 
 #featured-book-btn{
@@ -195,6 +204,7 @@ footer {
     height: 3.2rem;
     width: 9.5rem;
     font-size: 1.1rem;
+    z-index: 10;
 }
 
 #featured-book-img {

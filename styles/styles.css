@@ -12,9 +12,12 @@
 * {
     margin: 0;
     padding: 0;
-    height: 100vh;
-    width: 100vw;
+    box-sizing: border-box;
     font-family: 'Montserrat';
+}
+
+body {
+    height: 100vh;
 }
 
 /* Helper classes */
@@ -92,7 +95,6 @@ nav{
     height: 6.5%;
     background-color:var(--beige);
     color: var(--dark-brown);
-    width: 100%;
     margin: 0;
 }
 
@@ -120,7 +122,7 @@ footer {
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 #nav-items>li {
@@ -144,72 +146,43 @@ footer {
     margin-right: 1rem;
 }
 
+#search-bar {
+    width: 40%;
+}
+
 /* Header */
-#header-img-container{
-    height: 100%;
+
+#header-container {
+    color: white;
     width: 100%;
-    background-color: black;
+    height: 100%;
     position: relative;
 }
 
-#header-img-container > * {
+#header-img {
+    background-image: url("../assets/images/banner.jpeg");
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: .4;
     position: absolute;
 }
 
-#books-img{
-    height: 100%;
-    object-fit:cover;
-    opacity: .5;
-    box-shadow: inset 0 0 20px black;
+#header-featured-container {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr;
+   z-index: 10;
 }
 
-
-
-#featured-headline{
-    color: white;
-    top: 2.5rem;
-    left: 2rem;
-    font-size: 3rem;
-    font-weight: bolder;
-    background-color: red;
-    max-height: 15%;
-
+.header-item {
+    border: 4px solid white;
 }
 
-#featured-book-title{
-    color: white;
-    top: 7rem;
-    left: 2.5rem;
-    font-weight: normal;
-    background-color: red;
-    max-height: 10%;
-
+#test{
+    order: 2
 }
 
-#featured-book-description{
-    color: white;
-    top:9.5rem;
-    left: 2.5rem;
-    width: 35%;
-    font-style: italic;
-    font-size: medium;
-    max-height: 20%;
-    overflow-y: hidden;
-    background-color: red;
-}
-
-#featured-book-btn{
-    top: 15rem;
-    left: 2.5rem;
-    height: 3.2rem;
-    width: 9.5rem;
-    font-size: 1.1rem;
-    z-index: 10;
-}
-
-#featured-book-img {
-    height: 80%;
-    object-fit: contain;
-    top: 10%;
-    left: 3rem;
-}

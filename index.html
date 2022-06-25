@@ -5,13 +5,9 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="styles/styles.css" />
     <!-- Google Fonts -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Montserrat"
-    />
   </head>
 
-  <body>
+  <body id="main-container">
     <nav>
       <ul id="nav-items">
         <li id="logo" class="center-content-v">BOOKDB</li>
@@ -24,17 +20,31 @@
       </ul>
     </nav>
 
-    <header>
-      <div id="header-container">
-        <div id="header-img"></div>
-        <div id="header-featured-container">
-          <div class="header-item">Item 1</div>
-          <div id="test" class="header-item">Item 2</div>
-          <div class="header-item">Item 3</div>
+    <main>
+      <div id="banner">
+        <div id="banner-container">
+          <h1 class="center-content-h">Featured Book</h1>
+          <div id="featured-book">
+            <img
+              id="featured-book-cover"
+              src="./assets/images/random-book.jpeg"
+            />
+            <div id="featured-book-info">
+              <h2 id="featured-book-title">the king of drugs</h2>
+              <h3 id="featrued-book-description">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Similique quas nulla excepturi? Perspiciatis libero sequi
+                voluptatum, illum, autem eos inventore distinctio veritatis
+                harum aliquid vel dolores corrupti, minima dignissimos
+                accusamus?
+              </h3>
+              <button class="btn btn-secondary">Read More</button>
+            </div>
+          </div>
         </div>
       </div>
-    </header>
-    <main>Main</main>
+      <div id="book-area">Book Area</div>
+    </main>
     <footer>Footer</footer>
   </body>
 </html>

@@ -8,12 +8,13 @@
     --dark-brown: #795236;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100,0,200;0,300;0,700;0,900;1,200;1,300;1,700;1,900&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat';
+    font-family: 'Montserrat', sans-serif;
 }
 
 body {
@@ -91,27 +92,30 @@ body {
 }
 
 /* Page Sections */
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+}
 nav{
-    height: 6.5%;
+    flex-grow: 0.5;
     background-color:var(--beige);
     color: var(--dark-brown);
     margin: 0;
-}
-
-header{
-    height: 35%;
-    background-color:black;
+    display: flex;
 }
 
 main{
-    height: 60%;
+    flex-grow: 11;
     background-color:var(--beige);
-
+    display: flex;
+    flex-direction: column;
 }
 
 footer {
- height: 10%;
- background-color:var(--dark-beige);
+    flex-grow: 0.5;
+    background-color:var(--dark-beige);
+    display: flex;
 }
 
 /* Navigation */
@@ -152,37 +156,85 @@ footer {
 
 /* Header */
 
-#header-container {
+
+
+#banner {
+    background-color: black;
     color: white;
-    width: 100%;
-    height: 100%;
+    flex-grow: 6;
     position: relative;
+    
 }
 
-#header-img {
-    background-image: url("../assets/images/banner.jpeg");
+#banner::after {
+    content: '';
+    color: white;
+    position: absolute;
     width: 100%;
     height: 100%;
+    background-image: url("../assets/images/banner.jpeg");
+    background-position: top;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size:cover;
     opacity: .4;
-    position: absolute;
+    
 }
 
-#header-featured-container {
+#banner-container {
    position: absolute;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   z-index: 10;
    width: 100%;
    height: 100%;
-   display: grid;
-   grid-template-columns: 1fr 1fr 1fr;
-   z-index: 10;
 }
 
-.header-item {
-    border: 4px solid white;
+#banner-container>h1 {
+    text-transform: uppercase;
+    padding: 2rem 0 1rem 0;
 }
 
-#test{
-    order: 2
+#featured-book{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+#featured-book-cover {
+    height: 15rem;
+}
+
+#featured-book-info {
+    display: flex;
+    flex-direction: column;
+    max-width: 50rem;
+    gap: 1rem;
+}
+
+#featured-book-info > h2 {
+    text-transform: capitalize;
+    font-size: 2.2rem;
+}
+
+#featured-book-info > h3 {
+    font-weight: 100;
+    font-style: italic;
+    max-width: 25rem;
+    font-size: 1rem;
+}
+
+#featured-book-info > button {
+    width: 33%;
+    height: 2rem;
+    /* align-self: center; */
+}
+
+#book-area{
+    /* background-color: blue; */
+    flex-grow: 8;
+
 }
 

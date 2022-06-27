@@ -100,7 +100,7 @@ const displayCategory = async (index, category, entries) => {
     setElementContent(categoryTitle,category)
 
     const categoryBtn = document.createElement("button");
-    categoryBtn.classList.add("btn","btn-primary");
+    categoryBtn.classList.add("btn","btn-primary","category-btn");
     categoryBtn.setAttribute("id",`category-btn-${index+1}`)
     setElementContent(categoryBtn, "View More")
     

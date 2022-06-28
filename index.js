@@ -1,4 +1,4 @@
-const API_URL = "https://www.googleapis.com/books/v1/volumes?q=";
+const API_URL = "https://www.googleapis.com/books/v1/volumes";
 const popularAuhtors = ["Stephen King", "Dan Brown", "Leo Tolstoy", "Paolo Coelho", "Harper Lee", "Ernest Hemingway"];
 let popularCategories = ["Crime", "Adventure", "Mystery","Science Fiction", "Kids", "History"];
 
@@ -10,22 +10,26 @@ const removeItem = (array, itemToRemove)=> {
 }
 
 // Convert a spaced author name into query format
-const convertToQuery = name => name.toLowerCase().replace(" ","+");
+const convertToQuery = name => name?.toLowerCase().replace(" ","+") ?? "random";
 
 // Get random author from the popular authors array
 const generateRandomAuthor = () => {
-    const selectedAuthor = popularAuhtors[Math.floor(Math.random()*popularAuhtors.length)]
+    const selectedAuthor = popularAuhtors[Math.floor(Math.random()*popularAuhtors.length)] || "William Shakespeare" // Random default value
     return convertToQuery(selectedAuthor);
 }
 
 // Get random category from the popular categories array
-const generateRandomCategory = (categories) => {
-    const selectedCategory = categories[Math.floor(Math.random()*categories.length)]
+const generateRandomCategory = categories => {
+    const selectedCategory = categories[Math.floor(Math.random()*categories.length)] || "Geography" // Random default value
     return [selectedCategory, convertToQuery(selectedCategory)];
 }
 
 // Set the element content
 const setElementContent = (element, content) => {
+    if(!(element instanceof Element)){
+        console.error(element+" is not a DOM element");
+        return;
+    }
     if(element.nodeName === "IMG") {
         element.src = content
     } else {
@@ -42,52 +46,72 @@ const getData = async(url) => {
         return data;
     }
     catch(e){
-        console.log(e)
+        console.error("Unable to execute GET request. "+e)
     }
 }
 
 // Get the current most featured book for an authors
 const getFeaturedBook = async() => {
-    const featuredAuthor = generateRandomAuthor();
-    const featuredBook = await getData(`https://www.googleapis.com/books/v1/volumes?q=inauthor:${featuredAuthor}&maxResults=1`);
-    return featuredBook; 
-}
-
-// Set the featured book data
-const setFeaturedBook = async () => {
-    const featuredBook = await getFeaturedBook();
-
-    const featuredBookThumbnail = document.getElementById("featured-book-cover");
-    const featuredBookTitle = document.getElementById("featured-book-title");
-    const featuredBookDescription = document.getElementById("featured-book-description");
-    const featuredBookAuthor = document.getElementById("featured-book-author");
-    const featuredBookYear = document.getElementById("featured-book-year");
-    const featuredBookCategories = document.getElementById("featured-book-categories");
-
-    const {imageLinks, title, description, authors, categories,publishedDate} = featuredBook.items[0].volumeInfo;
-    const publishedYear = new Date(publishedDate)
-
-    setElementContent(featuredBookThumbnail, imageLinks.thumbnail);
-    setElementContent(featuredBookTitle, title);
-    setElementContent(featuredBookDescription, description);
-    setElementContent(featuredBookAuthor, authors);
-    setElementContent(featuredBookCategories, categories);
-    setElementContent(featuredBookYear, publishedYear.getFullYear());
-}
-
-// Generate 4 random
-const setCategories = async() => {
-    let categories = popularCategories;
-    for(let i=0; i<4; i++){
-        const [category, queryData] = generateRandomCategory(categories);
-        categories = removeItem(categories,category);
-        const categoryEntries = await getData(`https://www.googleapis.com/books/v1/volumes?q=${queryData}&maxResults=10&orderBy=relevance`);
-        displayCategory(i, category,categoryEntries);
+    try{
+        const featuredAuthor = generateRandomAuthor();
+        const featuredBook = await getData(`${API_URL}?q=inauthor:${featuredAuthor}&maxResults=1`);
+        return featuredBook; 
+    }
+    catch(e) {
+        console.error("Unable to retrieve featured book. "+e)
     }
 }
 
 // Set the featured book data
-const displayCategory = async (index, category, entries) => {
+const setFeaturedBook = async () => {
+    try{
+        const featuredBook = await getFeaturedBook();
+        
+        const featuredBookThumbnail = document.getElementById("featured-book-cover");
+        const featuredBookTitle = document.getElementById("featured-book-title");
+        const featuredBookDescription = document.getElementById("featured-book-description");
+        const featuredBookAuthor = document.getElementById("featured-book-author");
+        const featuredBookYear = document.getElementById("featured-book-year");
+        const featuredBookCategories = document.getElementById("featured-book-categories");
+        
+        const {imageLinks, title, description, authors, categories,publishedDate} = featuredBook?.items[0]?.volumeInfo;
+
+        const publishedYear = new Date(publishedDate)
+
+        setElementContent(featuredBookThumbnail, imageLinks?.thumbnail ?? "Unknown");
+        setElementContent(featuredBookTitle, title ?? "Unknown");
+        setElementContent(featuredBookDescription, description ?? "Unknown");
+        setElementContent(featuredBookAuthor, authors ?? "Unknown");
+        setElementContent(featuredBookCategories, categories ?? "Unknown");
+        
+        if(!isNaN(publishedYear))
+        setElementContent(featuredBookYear, publishedYear.getFullYear());
+        else 
+        setElementContent(featuredBookYear, "Unknown");
+        
+    }
+    catch(e) {
+        console.error("Unable to set featured book. "+e)
+    }
+}
+
+// Generate 4 random categories
+const setCategories = async() => {
+    try{
+        let categories = popularCategories;
+        for(let i=0; i<4; i++){
+            const [category, queryData] = generateRandomCategory(categories);
+            categories = removeItem(categories,category);
+            const categoryEntries = await getData(`${API_URL}?q=${queryData}&maxResults=10&orderBy=relevance`);
+            displayCategory(i, category,categoryEntries);
+        }
+    } catch(e) {
+        console.error("Unable to set featured categories"+ e)
+    }
+}
+
+// Set the featured book data
+const displayCategory = (index, category, entries) => {
     const categoryContainer = document.createElement("div");
     categoryContainer.classList.add("book-category");
     categoryContainer.setAttribute("id",`book-category-${index+1}`)

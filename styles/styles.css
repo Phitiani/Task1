@@ -344,16 +344,6 @@ footer {
     justify-content: start;
   }
 }
-/* 
-@media only screen and (max-device-width: 900px) {
-  #featured-book-title {
-    font-size: 1.8rem;
-  }
-
-  #featured-book-description {
-    max-width: 30rem;
-  }
-} */
 
 @media only screen and (max-device-width: 768px) {
   #featured-book-heading {
@@ -363,6 +353,7 @@ footer {
   #featured-book-cover {
     height: 12rem;
     width: 8rem;
+    margin-left: 0;
   }
 
   #featured-book {
@@ -376,6 +367,7 @@ footer {
   }
   #featured-book-title {
     font-size: 1.2rem;
+    text-align: center;
   }
   #featured-book-description {
     display: none;
@@ -388,6 +380,11 @@ footer {
   .featured-book-detail {
     font-size: 0.8rem;
     font-weight: 400;
+  }
+
+  .book-category {
+    margin: 0;
+    border-radius: 0;
   }
 }
 

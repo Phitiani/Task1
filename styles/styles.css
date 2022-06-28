@@ -344,16 +344,6 @@ footer {
     justify-content: start;
   }
 }
-/* 
-@media only screen and (max-device-width: 900px) {
-  #featured-book-title {
-    font-size: 1.8rem;
-  }
-
-  #featured-book-description {
-    max-width: 30rem;
-  }
-} */
 
 @media only screen and (max-device-width: 768px) {
   #featured-book-heading {

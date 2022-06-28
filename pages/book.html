@@ -13,7 +13,9 @@
   <body id="main-container">
     <nav>
       <ul id="nav-items">
-        <li id="logo" class="center-content-v nav-item">BOOKDB</li>
+        <li id="logo" class="center-content-v nav-item">
+          <a href="../index.html"> BOOKDB</a>
+        </li>
         <li id="search-bar" class="center-content nav-item">
           <input type="search" class="txt" placeholder="Enter book name..." />
         </li>
@@ -27,19 +29,33 @@
       <!-- Banner -->
       <div id="banner">
         <div id="b-banner-container">
-          <img id="b-book-cover" src="../assets/images/random-book.jpeg" />
+          <img id="b-book-cover" />
           <div id="b-book-details">
             <div id="main-details">
-              <h1 class="detail" id="book-title">The King of Drugs</h1>
+              <h1 class="detail" id="book-title">UNKNOWN</h1>
               <h2 class="detail" id="author-year">
-                <b>Nora Barrett,</b> (2020)
+                <b><span id="author-val"></span></b>, (<span
+                  id="year-val"
+                ></span
+                >)
               </h2>
             </div>
-            <h3 class="detail" id="categories"><b>Categories:</b> XXX</h3>
-            <h3 class="detail" id="publisher"><b>Publisher:</b> Blah blah</h3>
-            <h3 class="detail" id="language"><b>Language:</b> English</h3>
+            <h3 class="detail" id="categories">
+              <b>Categories: </b> <span id="categories-val"></span>
+            </h3>
+            <h3 class="detail" id="publisher">
+              <b>Publisher: </b><span id="publisher-val"></span>
+            </h3>
+            <h3 class="detail" id="language">
+              <b>Language: </b> <span id="language-val"></span>
+            </h3>
             <h3 class="detail" id="rating">
-              <b>Average Rating:</b> 5 (2000 ratings)
+              <b>Average Rating: </b>
+              <span id="average-rating-val"></span> (<span
+                id="rating-count-val"
+              >
+              </span>
+              votes)
             </h3>
             <button class="btn btn-secondary" id="btn-fav">
               Add to Favorites
@@ -47,10 +63,7 @@
 
             <h3 id="description">Description:</h3>
             <h4 class="detail" id="description-text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
-              distinctio dignissimos accusamus odio, cupiditate ipsum commodi
-              dolores possimus alias omnis perspiciatis deleniti beatae.
-              Corporis deleniti odio deserunt amet ipsum molestiae!:
+              <span id="description-text-val"> </span>
             </h4>
           </div>
         </div>
@@ -58,6 +71,6 @@
     </main>
     <footer>Footer</footer>
     <!-- Main App JS Script -->
-    <script src="./book.js"></script>
+    <script type="module" src="../scripts/book.js"></script>
   </body>
 </html>

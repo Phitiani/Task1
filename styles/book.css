@@ -24,6 +24,7 @@
   z-index: 10;
   height: 30rem;
   width: 20rem;
+  background-color: var(--darker-brown);
 }
 
 #b-banner-container {
@@ -68,7 +69,7 @@
   width: 20rem;
 }
 
-@media only screen and (max-device-width: 768px) {
+@media only screen and (max-device-width: 1240px) {
   #b-banner-container {
     flex-direction: column;
     align-items: center;
@@ -77,6 +78,7 @@
   #b-book-cover {
     height: 18rem;
     width: 12rem;
+    margin-left: 0;
   }
 
   #b-book-details {
@@ -92,9 +94,10 @@
   #book-title {
     font-family: "Montserrat";
     font-size: 3rem;
+    margin: 0;
   }
 
-  #b-book-details .detail {
+  #b-book-details .detail:not(#book-title) {
     margin-left: 1rem;
   }
 
@@ -112,5 +115,24 @@
 
   #b-book-details > #description {
     margin: 0 0 0 1rem;
+  }
+
+  main {
+    overflow: auto;
+    display: block;
+  }
+}
+
+@media only screen and (max-device-width: 425px) {
+  #book-title {
+    font-size: 2rem;
+  }
+
+  #main-details > #author-year {
+    font-size: 2rem;
+  }
+
+  .detail:not(#main-details):not(#book-title) {
+    font-size: 1rem;
   }
 }

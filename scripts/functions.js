@@ -32,5 +32,17 @@ const removeItem = (array, itemToRemove) => {
 const convertToQuery = (name) =>
   name?.toLowerCase().replace(" ", "+") ?? "random";
 
+// Checks if value is not "undefined" and not "null"
+const hasValue = (value) => value !== undefined && value != null;
+
+//Handles output based on value
+const handleValue = (node, value, outputIfValid, outputIfInvalid) => {
+  if (hasValue(value)) {
+    setElementContent(node, outputIfValid);
+  } else {
+    setElementContent(node, outputIfInvalid);
+  }
+};
+
 //Exports
-export { getData, setElementContent, removeItem, convertToQuery };
+export { getData, setElementContent, removeItem, convertToQuery, handleValue };

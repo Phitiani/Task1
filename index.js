@@ -75,10 +75,11 @@ const setFeaturedBook = async () => {
     setElementContent(featuredBookAuthor, authors ?? "Unknown");
     setElementContent(featuredBookCategories, categories ?? "Unknown");
 
-    if (!isNaN(publishedYear))
+    if (!isNaN(publishedYear)) {
       setElementContent(featuredBookYear, publishedYear.getFullYear());
-    else setElementContent(featuredBookYear, "Unknown");
-
+    } else {
+      setElementContent(featuredBookYear, "Unknown");
+    }
     setElementContent(featuredBookDescription, description ?? "Unknown");
 
     featuredBookBtn.setAttribute("href", "./pages/book.html?id=" + entryID);
@@ -138,7 +139,7 @@ const displayCategory = async (index, category, entries) => {
 
     const cover = document.createElement("img");
     cover.classList.add("entry-cover");
-    setElementContent(cover, imageLinks.thumbnail);
+    setElementContent(cover, imageLinks?.thumbnail);
 
     const name = document.createElement("h4");
     name.classList.add("entry-name", "center-content");

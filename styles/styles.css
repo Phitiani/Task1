@@ -116,9 +116,8 @@ nav {
   flex-grow: 0.5;
   background-color: var(--beige);
   color: var(--dark-brown);
-  margin: 0;
   display: flex;
-  min-height: 4em;
+  /* min-height: 4em; */
 }
 
 main {
@@ -129,8 +128,7 @@ main {
 }
 
 footer {
-  flex-grow: 0.5;
-  background-color: var(--dark-beige);
+  background-color: var(--brown);
   display: flex;
 }
 
@@ -142,9 +140,10 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-height: 4rem;
 }
 
-#nav-items > nav-item {
+#nav-items > .nav-item {
   height: 100%;
   display: flex;
   align-items: center;
@@ -167,6 +166,14 @@ footer {
 
 #search-bar {
   width: 40%;
+}
+
+#hamburger-btn {
+  display: none;
+}
+
+#menu {
+  display: none;
 }
 
 /* Banner */
@@ -265,6 +272,8 @@ footer {
 #featured-book-btn {
   width: 33%;
   height: 2rem;
+  font-size: 0.8rem;
+  text-align: center;
 }
 
 /* Book Area */
@@ -343,6 +352,26 @@ footer {
   align-items: flex-end;
 }
 
+/* Footer */
+#footer-items {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  gap: 1rem;
+  margin: 1rem;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-item {
+  color: var(--beige);
+}
+
+.footer-item:hover {
+  color: var(--dark-brown);
+}
+
 @media only screen and (max-device-width: 1550px) {
   #featured-book-description {
     max-width: 34rem;
@@ -418,7 +447,7 @@ footer {
     align-items: center;
   }
   #featured-book-title {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
   #featured-book-description {
     display: none;
@@ -431,5 +460,69 @@ footer {
   .featured-book-detail {
     font-size: 0.8rem;
     font-weight: 400;
+  }
+  #nav-items {
+    justify-content: space-between;
+  }
+  #nav-items > li:not(.mobile-item) {
+    display: none;
+  }
+  nav {
+    flex-direction: column;
+  }
+  #hamburger-btn {
+    display: block;
+    margin-right: 1rem;
+    border-radius: 0.5rem;
+  }
+
+  .hamburger-btn-active {
+    background-color: var(--dark-beige);
+  }
+
+  #menu-btn {
+    width: 40px;
+    height: 35px;
+    border-radius: 3rem;
+    background-color: transparent;
+    color: var(--dark-brown);
+    border: 0;
+    font-weight: 600;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3.5px;
+  }
+
+  #menu {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .menu-item {
+    height: 2.5rem;
+    background-color: var(--brown);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .menu-item:n .menu-item:hover {
+    background-color: var(--dark-brown);
+  }
+
+  #menu-search {
+    width: 80%;
+    height: 60%;
+  }
+
+  .hamburger-bar {
+    width: 28px;
+    height: 4px;
+    background-color: var(--dark-brown);
+    color: black;
   }
 }

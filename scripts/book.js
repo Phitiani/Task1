@@ -8,7 +8,6 @@ const getBook = async () => {
 
   try {
     const book = await getData(API_URL + "/" + id);
-    console.log(book);
     return book;
   } catch (e) {
     console.error("Book not found " + e);

@@ -3,6 +3,7 @@
   color: white;
   height: 22rem;
   position: relative;
+  display: flex;
 }
 
 #b-banner::after {
@@ -70,6 +71,10 @@
 }
 
 @media only screen and (max-device-width: 1240px) {
+  #b-banner {
+    flex-direction: column;
+    align-items: center;
+  }
   #b-banner-container {
     flex-direction: column;
     align-items: center;
@@ -93,7 +98,7 @@
 
   #book-title {
     font-family: "Montserrat";
-    font-size: 3rem;
+    font-size: 2.2rem;
     margin: 0;
   }
 
@@ -124,15 +129,16 @@
 }
 
 @media only screen and (max-device-width: 425px) {
+  .detail:not(#main-details):not(#book-title):not(#author-year) {
+    font-size: 1rem;
+  }
   #book-title {
     font-size: 2rem;
+    text-align: center;
   }
 
   #main-details > #author-year {
-    font-size: 2rem;
-  }
-
-  .detail:not(#main-details):not(#book-title) {
-    font-size: 1rem;
+    font-size: 1.2rem;
+    text-align: center;
   }
 }

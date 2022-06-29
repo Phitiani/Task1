@@ -5,12 +5,16 @@ const getData = async (url) => {
     const data = await jsonData.json();
     return data;
   } catch (e) {
-    console.log(e);
+    console.error("Unable to execute GET request. " + e);
   }
 };
 
-// Set DOM element content
+/// Set the element content
 const setElementContent = (element, content) => {
+  if (!(element instanceof Element)) {
+    console.error(element + " is not a DOM element");
+    return;
+  }
   if (element.nodeName === "IMG") {
     element.src = content;
   } else {
@@ -25,7 +29,8 @@ const removeItem = (array, itemToRemove) => {
 };
 
 // Convert a spaced author name into query format
-const convertToQuery = (name) => name.toLowerCase().replace(" ", "+");
+const convertToQuery = (name) =>
+  name?.toLowerCase().replace(" ", "+") ?? "random";
 
 //Exports
 export { getData, setElementContent, removeItem, convertToQuery };

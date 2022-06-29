@@ -9,51 +9,82 @@ import { API_URL, popularAuhtors, popularCategories } from "./config/config.js";
 // Get random author from the popular authors array
 const generateRandomAuthor = () => {
   const selectedAuthor =
-    popularAuhtors[Math.floor(Math.random() * popularAuhtors.length)];
+    popularAuhtors[Math.floor(Math.random() * popularAuhtors.length)] ||
+    "William Shakespeare"; // Random default value
   return convertToQuery(selectedAuthor);
 };
 
 // Get random category from the popular categories array
 const generateRandomCategory = (categories) => {
   const selectedCategory =
-    categories[Math.floor(Math.random() * categories.length)];
+    categories[Math.floor(Math.random() * categories.length)] || "Geography"; // Random default value
   return [selectedCategory, convertToQuery(selectedCategory)];
 };
 
 // Get the current most featured book for an authors
 const getFeaturedBook = async () => {
-  const featuredAuthor = generateRandomAuthor();
-  const featuredBook = await getData(
-    `${API_URL}?q=inauthor:${featuredAuthor}&maxResults=1`
-  );
-  return featuredBook;
+  try {
+    const featuredAuthor = generateRandomAuthor();
+    const featuredBook = await getData(
+      `${API_URL}?q=inauthor:${featuredAuthor}&maxResults=1`
+    );
+    return featuredBook;
+  } catch (e) {
+    console.error("Unable to retrieve featured book. " + e);
+  }
 };
 
 // Set the featured book data
 const setFeaturedBook = async () => {
-  const featuredBook = await getFeaturedBook();
+  try {
+    const featuredBook = await getFeaturedBook();
 
-  const featuredBookThumbnail = document.getElementById("featured-book-cover");
-  const featuredBookTitle = document.getElementById("featured-book-title");
-  const featuredBookDescription = document.getElementById(
-    "featured-book-description"
-  );
-  const featuredBookAuthor = document.getElementById("featured-book-author");
-  const featuredBookYear = document.getElementById("featured-book-year");
-  const featuredBookCategories = document.getElementById(
-    "featured-book-categories"
-  );
+    const featuredBookThumbnail = document.getElementById(
+      "featured-book-cover"
+    );
+    const featuredBookTitle = document.getElementById("featured-book-title");
+    const featuredBookAuthor = document.getElementById("featured-book-author");
+    const featuredBookYear = document.getElementById("featured-book-year");
+    const featuredBookCategories = document.getElementById(
+      "featured-book-categories"
+    );
+    const featuredBookDescription = document.getElementById(
+      "featured-book-description"
+    );
 
-  const { imageLinks, title, description, authors, categories, publishedDate } =
-    featuredBook.items[0].volumeInfo;
-  const publishedYear = new Date(publishedDate);
+    const featuredBookBtn = document.getElementById("featured-book-btn");
 
-  setElementContent(featuredBookThumbnail, imageLinks.thumbnail);
-  setElementContent(featuredBookTitle, title);
-  setElementContent(featuredBookDescription, description);
-  setElementContent(featuredBookAuthor, authors);
-  setElementContent(featuredBookCategories, categories);
-  setElementContent(featuredBookYear, publishedYear.getFullYear());
+    const entryID = featuredBook?.items[0]?.id;
+
+    const {
+      imageLinks,
+      title,
+      description,
+      authors,
+      categories,
+      publishedDate,
+    } = featuredBook?.items[0]?.volumeInfo;
+
+    const publishedYear = new Date(publishedDate);
+
+    setElementContent(
+      featuredBookThumbnail,
+      imageLinks?.thumbnail ?? "Unknown"
+    );
+    setElementContent(featuredBookTitle, title ?? "Unknown");
+    setElementContent(featuredBookAuthor, authors ?? "Unknown");
+    setElementContent(featuredBookCategories, categories ?? "Unknown");
+
+    if (!isNaN(publishedYear))
+      setElementContent(featuredBookYear, publishedYear.getFullYear());
+    else setElementContent(featuredBookYear, "Unknown");
+
+    setElementContent(featuredBookDescription, description ?? "Unknown");
+
+    featuredBookBtn.setAttribute("href", "./pages/book.html?id=" + entryID);
+  } catch (e) {
+    console.error("Unable to set featured book. " + e);
+  }
 };
 
 // Generate 4 random

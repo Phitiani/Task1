@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="styles/styles.css" />
@@ -10,33 +10,73 @@
   </head>
 
   <body id="main-container">
+    <!-- Navigation -->
     <nav>
       <ul id="nav-items">
-        <li id="logo" class="center-content-v nav-item">BOOKDB</li>
+        <li id="logo" class="center-content-v nav-item mobile-item">BOOKDB</li>
         <li id="search-bar" class="center-content nav-item">
-          <input type="search" class="txt" placeholder="Enter book name..." />
+          <input
+            id="main-search-bar"
+            class="txt"
+            placeholder="Enter book name..."
+          />
+          <div id="search-results" class="hidden"></div>
         </li>
         <li id="user-area" class="center-content-v nav-item">
           <button id="logout-btn" class="btn btn-primary">Logout</button>
         </li>
+        <li id="hamburger-btn" class="mobile-item hamburger-btn-active">
+          <a id="menu-btn">
+            <div class="hamburger-bar" id="hamburger-bar-1"></div>
+            <div class="hamburger-bar" id="hamburger-bar-2"></div>
+            <div class="hamburger-bar" id="hamburger-bar-3"></div>
+          </a>
+        </li>
+      </ul>
+      <ul id="menu">
+        <li class="menu-item">
+          <input
+            id="menu-search"
+            class="txt"
+            placeholder="Enter book name..."
+          />
+          <div id="menu-search-results" class=""></div>
+        </li>
+        <li class="menu-item">My Favorites</li>
+        <li class="menu-item">Logout</li>
       </ul>
     </nav>
-    
+    <!-- Main -->
     <main>
       <!-- Banner -->
       <div id="banner">
         <div id="banner-container">
-          <h1 class="center-content-h" id="featured-book-heading">Featured Book</h1>
+          <h1 class="center-content-h" id="featured-book-heading">
+            Featured Book
+          </h1>
           <div id="featured-book">
-            <img
-            id="featured-book-cover"
-            />
+            <img id="featured-book-cover" />
             <div id="featured-book-info">
               <h2 id="featured-book-title" class="loading-skeleton"></h2>
               <div id="featured-book-details">
-                <h5 id="featured-book-author" class="featured-book-detail loading-skeleton" >Author</h5>
-                <h5 id="featured-book-year" class="featured-book-detail loading-skeleton">Year</h5>
-                <h5 id="featured-book-categories" class="featured-book-detail loading-skeleton">Categories</h5>
+                <h5
+                  id="featured-book-author"
+                  class="featured-book-detail loading-skeleton"
+                >
+                  Author
+                </h5>
+                <h5
+                  id="featured-book-year"
+                  class="featured-book-detail loading-skeleton"
+                >
+                  Year
+                </h5>
+                <h5
+                  id="featured-book-categories"
+                  class="featured-book-detail loading-skeleton"
+                >
+                  Categories
+                </h5>
               </div>
               <h3 id="featured-book-description" class="loading-skeleton">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -45,18 +85,37 @@
                 harum aliquid vel dolores corrupti, minima dignissimos
                 accusamus?
               </h3>
-              <button class="btn btn-secondary" id="featured-book-btn">Read More</button>
+              <a
+                class="btn btn-secondary center-content"
+                id="featured-book-btn"
+              >
+                Read More
+              </a>
             </div>
           </div>
         </div>
       </div>
       <!-- Book Area -->
-      <div id="book-area">
-        <div>
-        </main>
-        <footer>Footer</footer>
-        <!-- Main App JS Script -->
-        <script src="index.js"></script>
-      </body>
-      </html>
-      
+      <div id="book-area"></div>
+    </main>
+    <footer>
+      <ul id="footer-items">
+        <li class="footer-item">
+          <a
+            href="https://developers.google.com/books/docs/overview"
+            class="footer-item-content"
+            >API Documentation</a
+          >
+        </li>
+        <li class="footer-item">
+          <b>BookDB</b>
+        </li>
+      </ul>
+    </footer>
+    <!-- Main App JS Script -->
+    <script type="module" src="index.js"></script>
+    <!-- Navigation scripts -->
+    <script src="./scripts/nav.js"></script>
+    <script type="module" src="./scripts/search.js"></script>
+  </body>
+</html>

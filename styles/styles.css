@@ -160,8 +160,17 @@ footer {
   justify-content: flex-end;
 }
 
-#logout-btn {
+#user-area > :not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+#user-area > :last-child {
   margin-right: 1rem;
+}
+
+#username-lbl::after {
+  content: "|";
+  margin-left: 0.5rem;
 }
 
 #search-bar {
@@ -197,6 +206,10 @@ footer {
   background-color: black;
   height: 10%;
   width: 5%;
+}
+
+#favorite-btn-link:hover {
+  color: white;
 }
 
 .search-result:hover {
@@ -466,7 +479,7 @@ footer {
   }
 }
 
-@media only screen and (max-device-width: 425px) {
+@media only screen and (max-device-width: 768px) {
   #featured-book-heading {
     font-size: 1.5rem;
   }

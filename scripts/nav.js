@@ -1,3 +1,7 @@
+import { handleValue } from "./functions.js";
+import { getLoggedInUser } from "./session.js";
+import { logout } from "./logout.js";
+
 function toggleMenu() {
   const menu = document.getElementById("menu");
   const hamburgerBtn = document.getElementById("hamburger-btn");
@@ -27,3 +31,18 @@ window.addEventListener(
   },
   false
 );
+document.getElementById("logout-btn").addEventListener("click", logout);
+document.getElementById("menu-logout-btn").addEventListener("click", logout);
+
+window.onload = () => {
+  // Username label node
+  const usernameLabelNode = document.getElementById("username-lbl");
+
+  const username = getLoggedInUser().username;
+  handleValue(
+    usernameLabelNode,
+    usernameLabelNode,
+    username.toUpperCase(),
+    "Unknown"
+  );
+};

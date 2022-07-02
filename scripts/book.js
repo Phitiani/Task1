@@ -1,11 +1,33 @@
 import { getData, setElementContent } from "./functions.js";
 import { API_URL } from "../config/config.js";
+import {
+  addToFavorites,
+  bookAlreadyInFavorites,
+  removeFromFavorites,
+} from "./favorites.js";
+
+const getBookID = () => {
+  const queryParams = new URLSearchParams(window.location.search);
+  const { id } = Object.fromEntries(queryParams.entries());
+  return id;
+};
+const bookID = getBookID();
+let isFavorite = bookAlreadyInFavorites(bookID);
+
+const handleSetFavorite = () => {
+  addToFavorites(getBookID());
+  isFavorite = true;
+};
+
+const handleUnsetFavorite = () => {
+  removeFromFavorites(getBookID());
+  isFavorite = false;
+};
 
 const getBook = async () => {
   //Add handling for no id provided
-  const queryParams = new URLSearchParams(window.location.search);
-  const { id } = Object.fromEntries(queryParams.entries());
 
+  const id = getBookID();
   try {
     const book = await getData(API_URL + "/" + id);
     return book;
@@ -43,6 +65,7 @@ const setBook = async () => {
     const averageRatingNode = document.getElementById("average-rating-val");
     const ratingCountNode = document.getElementById("rating-count-val");
     const descriptionNode = document.getElementById("description-text-val");
+    const favButtonNode = document.getElementById("btn-fav");
 
     setElementContent(coverNode, imageLinks?.thumbnail ?? "");
     setElementContent(titleNode, title ?? "Unknown");
@@ -59,6 +82,21 @@ const setBook = async () => {
     if (!isNaN(publishedYear))
       setElementContent(publishedYearNode, publishedYear.getFullYear());
     else setElementContent(publishedYearNode, "Unknown");
+
+    if (!title) {
+      document.title = "BookDB";
+    } else {
+      document.title = "BookDB - " + title;
+    }
+
+    favButtonNode.addEventListener(
+      "click",
+      isFavorite ? handleUnsetFavorite : handleSetFavorite
+    );
+    setElementContent(
+      favButtonNode,
+      isFavorite ? "Remove from Favorites" : "Add to Favorites"
+    );
   } catch (e) {
     console.error("Unable to set book" + e);
   }

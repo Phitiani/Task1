@@ -1,13 +1,38 @@
 import { handleValue } from "./functions.js";
+import { setLoggedInUser } from "./session.js";
+import { getUserbase, getUserByUsername } from "./session.js";
 
-//Register function
+// Initialize the userbase in localStorage if it does not already exist
+const initializeUserBase = () => {
+  if (!localStorage) {
+    // console.error("Error! Cannot access local storage");
+    return;
+  }
+  if (!localStorage.userbase) {
+    // console.error("Error! Userbase does not exist");
+    const userbase = [
+      {
+        username: "admin",
+        password: encryptPassword("Admin"),
+        favorites: [],
+      },
+    ];
+    localStorage.userbase = JSON.stringify(userbase);
+    // console.log("User base was initialized");
+  }
+};
+
+// Encrypt the password
+const encryptPassword = (password) => btoa(password);
+
+// Decrypt the password
+const decryptPassword = (encryptedPassword) => atob(encryptedPassword);
+
+//Main user register function
 const register = (e) => {
   e.preventDefault();
 
-  if (!localStorage.userbase) {
-    console.error("Local storage is inaccessible");
-    return;
-  }
+  initializeUserBase();
 
   // Input Nodes
   const usernameNode = document.getElementById("register-username");
@@ -16,9 +41,9 @@ const register = (e) => {
     "register-confirm-password"
   );
 
-  const username = usernameNode.value.toLowerCase();
-  const password = passwordNode.value;
-  const confirmationPassword = confirmPasswordNode.value;
+  const username = usernameNode?.value.toLowerCase();
+  const password = passwordNode?.value;
+  const confirmationPassword = confirmPasswordNode?.value;
 
   const registrationIsValid = validateRegistration(
     username,
@@ -28,27 +53,38 @@ const register = (e) => {
 
   // Add user to localStorage userbase
   if (registrationIsValid) {
-    addUserToUserbase(username, password);
+    const user = createUser(username, password);
+    addUserToUserbase(user);
+    setLoggedInUser(user);
     window.location.href = "../pages/home.html";
   }
 };
 
-// Adds the user the local storage user base
-const addUserToUserbase = (username, password) => {
-  let userbase = JSON.parse(localStorage?.userbase);
-  userbase.push({
+// Create and return new user object
+const createUser = (username, password) => {
+  const initialFavoritesArray = [];
+  const user = {
     username,
-    password,
-  });
+    password: encryptPassword(password),
+    favorites: initialFavoritesArray,
+  };
+  return user;
+};
+
+// Adds the user the local storage user base
+const addUserToUserbase = (user) => {
+  let userbase = getUserbase();
+  userbase.push(user);
   localStorage.userbase = JSON.stringify(userbase);
 };
 
 // Checks if the entered username already exists
 const usernameInUserbase = (username) => {
-  const userbase = JSON.parse(localStorage?.userbase);
+  const userbase = getUserbase();
   return userbase.some((user) => user.username === username);
 };
 
+// Main registration validation function
 const validateRegistration = (username, password, confirmationPassword) => {
   // Validation Nodes
   const usernameValidationNode = document.getElementById("username-v-msg");
@@ -198,24 +234,27 @@ const validateConfirmationPassword = (password, confirmationPassword) => {
 // Main login function
 const login = (e) => {
   e.preventDefault();
-  if (!localStorage.userbase) {
-    console.error("Local storage is inaccessible");
-    return;
-  }
+
+  initializeUserBase();
+
   const usernameNode = document.getElementById("login-username");
   const passwordNode = document.getElementById("login-password");
 
-  const username = usernameNode.value.toLowerCase();
-  const password = passwordNode.value;
+  const username = usernameNode?.value.toLowerCase();
+  const password = passwordNode?.value;
 
   const loginIsValid = validateLogin(username, password);
 
   if (loginIsValid) {
     // console.log(`The user ${username} logged in successfully!`);
+    const user = getUserByUsername(username);
+    setLoggedInUser(user);
+
     window.location.href = "../pages/home.html";
   }
 };
 
+// Main login validation function
 const validateLogin = (username, password) => {
   const usernameValidationNode = document.getElementById(
     "login-username-v-msg"
@@ -256,6 +295,7 @@ const validateLogin = (username, password) => {
   return userExists.result && passwordIsCorrect;
 };
 
+// Validate the entered username and check if it exists in the local storage
 const validateUserOnLogin = (username) => {
   let error = "";
   if (username === undefined || username === null) {
@@ -279,6 +319,7 @@ const validateUserOnLogin = (username) => {
   return { result: true, message: "Username is in userbase" };
 };
 
+// Validate the password for the user
 const validatePasswordOnLogin = (username, password) => {
   let error = "";
   if (password === undefined || password === null) {
@@ -293,9 +334,14 @@ const validatePasswordOnLogin = (username, password) => {
     return { result: false, message: error };
   }
 
-  const userbase = JSON.parse(localStorage.userbase);
-  let user = userbase.filter((user) => user.username === username);
-  if (user[0]?.password !== password) {
+  const userbase = getUserbase();
+  let user = getUserByUsername(username);
+  if (user?.password === null || user?.password === undefined) {
+    error = "The user or their password were not found";
+    // console.error(error);
+    return { result: false, message: error };
+  }
+  if (decryptPassword(user.password) !== password) {
     error = "Incorrect Password";
     //   console.error(error);
     return { result: false, message: error };

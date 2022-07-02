@@ -29,6 +29,7 @@ const getSearchResults = async (resultsNode, searchInput) => {
 const displaySearchResults = async (searchInput, searchNode, resultsNode) => {
   try {
     const results = await getSearchResults(resultsNode, searchInput);
+    clearSearchResults(resultsNode);
     for (let index = 0; index < 4; index++) {
       const resultID = results?.items[0]?.id;
       const { title, publishedDate, authors, imageLinks } =
@@ -85,6 +86,7 @@ const displaySearchResults = async (searchInput, searchNode, resultsNode) => {
       resultNode.appendChild(resultInfoNode);
 
       resultLink.appendChild(resultNode);
+
       resultsNode.appendChild(resultLink);
     }
   } catch (e) {

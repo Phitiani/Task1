@@ -11,12 +11,12 @@ const popularAuhtors = [
 ];
 
 const popularCategories = [
-  "Crime",
-  "Adventure",
-  "Mystery",
+  "Arabic",
+  "Comics",
   "Science Fiction",
-  "Kids",
-  "History",
+  "Manga",
+  "Magic",
+  "Human History",
 ];
 
 export { API_URL, API_KEY, popularAuhtors, popularCategories };

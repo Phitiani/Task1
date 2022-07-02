@@ -29,7 +29,7 @@ const register = (e) => {
   // Add user to localStorage userbase
   if (registrationIsValid) {
     addUserToUserbase(username, password);
-    window.location.href = "../index.html";
+    window.location.href = "../pages/home.html";
   }
 };
 
@@ -212,7 +212,7 @@ const login = (e) => {
 
   if (loginIsValid) {
     // console.log(`The user ${username} logged in successfully!`);
-    window.location.href = "../index.html";
+    window.location.href = "../pages/home.html";
   }
 };
 

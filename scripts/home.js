@@ -3,8 +3,12 @@ import {
   removeItem,
   convertToQuery,
   setElementContent,
-} from "./scripts/functions.js";
-import { API_URL, popularAuhtors, popularCategories } from "./config/config.js";
+} from "../scripts/functions.js";
+import {
+  API_URL,
+  popularAuhtors,
+  popularCategories,
+} from "../config/config.js";
 
 // Get random author from the popular authors array
 const generateRandomAuthor = () => {
@@ -82,7 +86,7 @@ const setFeaturedBook = async () => {
     }
     setElementContent(featuredBookDescription, description ?? "Unknown");
 
-    featuredBookBtn.setAttribute("href", "./pages/book.html?id=" + entryID);
+    featuredBookBtn.setAttribute("href", "../pages/book.html?id=" + entryID);
   } catch (e) {
     console.error("Unable to set featured book. " + e);
   }
@@ -132,7 +136,7 @@ const displayCategory = async (index, category, entries) => {
     const entryID = entry.id;
 
     const link = document.createElement("a");
-    link.setAttribute("href", "./pages/book.html?id=" + entryID);
+    link.setAttribute("href", "../pages/book.html?id=" + entryID);
 
     const book = document.createElement("div");
     book.classList.add("category-books-entry");

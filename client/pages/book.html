@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../styles/styles.css" />
+    <link rel="stylesheet" href="../styles/book.css" />
+    <title>BookDB - Book Title</title>
+    <!-- Small script to check if a user has logged in-->
+    <script type="module" src="../scripts/authorization.js"></script>
+  </head>
+
+  <body id="main-container">
+    <!-- Navigation -->
+    <nav>
+      <ul id="nav-items">
+        <li id="logo" class="center-content-v nav-item mobile-item">
+          <a href="../pages/home.html">BOOKDB</a>
+        </li>
+        <li id="search-bar" class="center-content nav-item">
+          <input
+            id="main-search-bar"
+            class="txt"
+            placeholder="Enter book name..."
+          />
+          <div id="search-results" class="hidden"></div>
+        </li>
+        <li id="user-area" class="center-content-v nav-item">
+          <h4 id="username-lbl" class="user-area-item">Username</h4>
+          <a id="favorite-btn-link" href="./favorites.html">
+            <button id="favorite-btn" class="btn btn-primary user-area-item">
+              Favorites
+            </button>
+          </a>
+          <button id="logout-btn" class="btn btn-primary user-area-item">
+            Logout
+          </button>
+        </li>
+        <li id="hamburger-btn" class="mobile-item hamburger-btn-active">
+          <a id="menu-btn">
+            <div class="hamburger-bar" id="hamburger-bar-1"></div>
+            <div class="hamburger-bar" id="hamburger-bar-2"></div>
+            <div class="hamburger-bar" id="hamburger-bar-3"></div>
+          </a>
+        </li>
+      </ul>
+      <ul id="menu">
+        <li class="menu-item">
+          <input
+            id="menu-search"
+            class="txt menu-search"
+            placeholder="Enter book name..."
+          />
+        </li>
+        <li class="menu-item" id="menu-favorites-btn">
+          <a href="./favorites.html">My Favorites</a>
+        </li>
+        <li class="menu-item" id="menu-logout-btn">Logout</li>
+      </ul>
+    </nav>
+    <!-- Main -->
+    <main>
+      <!-- Banner -->
+      <div id="banner">
+        <div id="b-banner-container">
+          <img id="b-book-cover" />
+          <div id="b-book-details">
+            <div id="main-details">
+              <h1 class="detail" id="book-title">UNKNOWN</h1>
+              <h2 class="detail" id="author-year">
+                <b><span id="author-val"></span></b>, (<span
+                  id="year-val"
+                ></span
+                >)
+              </h2>
+            </div>
+            <h3 class="detail" id="categories">
+              <b>Categories: </b> <span id="categories-val"></span>
+            </h3>
+            <h3 class="detail" id="publisher">
+              <b>Publisher: </b><span id="publisher-val"></span>
+            </h3>
+            <h3 class="detail" id="language">
+              <b>Language: </b> <span id="language-val"></span>
+            </h3>
+            <h3 class="detail" id="rating">
+              <b>Average Rating: </b>
+              <span id="average-rating-val"></span> (<span
+                id="rating-count-val"
+              >
+              </span>
+              votes)
+            </h3>
+            <button class="btn btn-secondary" id="btn-fav">
+              Add to Favorites
+            </button>
+
+            <h3 id="description">Description:</h3>
+            <h4 class="detail" id="description-text">
+              <span id="description-text-val"> </span>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <ul id="footer-items">
+        <li class="footer-item">
+          <a
+            href="https://developers.google.com/books/docs/overview"
+            class="footer-item-content"
+            >API Documentation</a
+          >
+        </li>
+        <li class="footer-item">
+          <b>BookDB</b>
+        </li>
+      </ul>
+    </footer>
+    <!-- Book Page JS Script -->
+    <script type="module" src="../scripts/book.js"></script>
+    <!-- Navigation script -->
+    <script type="module" src="../scripts/nav.js"></script>
+    <script type="module" src="../scripts/search.js"></script>
+    <!-- Favorites script -->
+    <script type="moudle" src="../scripts//favorites.js"></script>
+  </body>
+</html>

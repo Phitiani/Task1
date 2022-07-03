@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <link rel="stylesheet" href="./styles/login.css" />
+    <title>BookDB - Home</title>
+  </head>
+
+  <body id="main-container">
+    <!-- Main -->
+    <main id="login-container" class="center-content">
+      <div id="user-box">
+        <section id="existing-user">
+          <div id="existing-user-content">
+            <h1 id="logo">BOOKDB</h1>
+            <form id="login-form">
+              <h2 id="header">Sign in to your account</h2>
+              <h3 class="label">Username</h3>
+              <input
+                id="login-username"
+                type="text"
+                class="txt"
+                placeholder="Username..."
+              />
+              <p
+                id="login-username-v-msg"
+                class="login-validation validation-msg hidden"
+              >
+                Validation message
+              </p>
+              <h3 class="label">Password</h3>
+              <input
+                id="login-password"
+                type="password"
+                class="txt"
+                placeholder="Password..."
+              />
+              <p
+                id="login-password-v-msg"
+                class="login-validation validation-msg hidden"
+              >
+                Validation message
+              </p>
+              <input
+                id="login-btn"
+                type="submit"
+                class="btn btn-secondary"
+                value="Login"
+              />
+            </form>
+          </div>
+        </section>
+        <aside id="new-user">
+          <div id="new-user-content">
+            <form id="register-form">
+              <h2 id="header">Create a new account</h2>
+              <h3 class="label">Username</h3>
+              <input
+                id="register-username"
+                type="text"
+                class="txt"
+                placeholder="Enter a username"
+              />
+              <p id="username-v-msg" class="validation-msg hidden">
+                Validation message
+              </p>
+              <h3 class="label">Password</h3>
+              <input
+                id="register-password"
+                type="password"
+                class="txt"
+                placeholder="Enter a password"
+              />
+              <p id="password-v-msg" class="validation-msg hidden">
+                Validation message
+              </p>
+              <h3 class="label">Confirm Password</h3>
+              <input
+                id="register-confirm-password"
+                type="password"
+                class="txt"
+                placeholder="Enter your password again"
+              />
+              <p id="confirm-password-v-msg" class="validation-msg hidden">
+                Validation message
+              </p>
+              <input
+                id="register-btn"
+                type="submit"
+                class="btn btn-primary"
+                value="Sign Up"
+              />
+            </form>
+          </div>
+        </aside>
+      </div>
+    </main>
+    <!-- Main App JS Script -->
+    <script type="module" src="./scripts/user.js"></script>
+  </body>
+</html>
